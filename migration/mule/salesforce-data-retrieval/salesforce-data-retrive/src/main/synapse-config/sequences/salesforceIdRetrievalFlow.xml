@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="salesforceIdRetrievalFlow" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <salesforcerest.init>
+        <accessToken></accessToken>
+        <apiVersion>v44.0</apiVersion>
+        <hostName>https://login.salesforce.com</hostName>
+        <refreshToken></refreshToken>
+        <clientSecret></clientSecret>
+        <clientId></clientId>
+        <apiUrl></apiUrl>
+        <registryPath></registryPath>
+    </salesforcerest.init>
+    <log level="full" separator=","/>
+    <salesforcerest.query>
+        <queryString>select id, name from Account</queryString>
+    </salesforcerest.query>
+</sequence>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/listener" name="salesforce-data-retrieval" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <sequence key="describeGlobal"/>
+            <payloadFactory media-type="json">
+                <format>{"Objects":$1}</format>
+                <args>
+                    <arg evaluator="json" expression="$.sobjects"/>
+                </args>
+            </payloadFactory>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" url-mapping="/retrievalFlowListener">
+        <inSequence>
+            <sequence key="salesforceIdRetrievalFlow"/>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>
