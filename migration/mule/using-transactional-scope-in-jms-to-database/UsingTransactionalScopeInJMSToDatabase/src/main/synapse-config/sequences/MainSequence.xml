@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="MainSequence" onError="FaultSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+    <log level="custom">
+        <property name="STATUS" value="Inserting data to the Database..."/>
+    </log>
+    <transaction action="new"/>
+    <dbreport useTransaction="true">
+        <connection>
+            <pool>
+                <dsName>ORDERS_DS</dsName>
+            </pool>
+        </connection>
+        <statement>
+            <sql><![CDATA[INSERT INTO orders (item_id, item_units, customer_id) values (?,?,?)]]></sql>
+            <parameter expression="//order/itemId" type="INTEGER"/>
+            <parameter expression="//order/itemUnits" type="INTEGER"/>
+            <parameter expression="//order/customerId" type="INTEGER"/>
+        </statement>
+    </dbreport>
+    <property expression="fn:concat('Order ID - ', //order/itemId, ' inserted.', '&#xa;')" name="symbol" scope="default" type="STRING" xmlns:m0="http://services.samples/xsd"/>
+    <fileconnector.append>
+        <destination>/home/vive/Desktop/file</destination>
+        <inputContent>{get-property('symbol')}</inputContent>
+    </fileconnector.append>
+    <log level="custom">
+        <property name="STATUS" value="Sending data to queue..."/>
+    </log>
+    <transaction action="commit"/>
+    <send>
+        <endpoint>
+            <address uri="jms:/out?transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;java.naming.provider.url=tcp://localhost:61616&amp;transport.jms.DestinationType=queue">
+                <suspendOnFailure>
+                    <initialDuration>-1</initialDuration>
+                    <progressionFactor>1</progressionFactor>
+                </suspendOnFailure>
+                <markForSuspension>
+                    <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                </markForSuspension>
+            </address>
+        </endpoint>
+    </send>
+</sequence>

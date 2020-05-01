@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="FaultSequence" groupId="com.example.UsingTransactionalScopeInJMSToDatabase.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/FaultSequence.xml</file>
+    </artifact>
+    <artifact name="MainSequence" groupId="com.example.UsingTransactionalScopeInJMSToDatabase.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/MainSequence.xml</file>
+    </artifact>
+    <artifact name="OrdersInboundEP" groupId="com.example.UsingTransactionalScopeInJMSToDatabase.inbound-endpoint" version="1.0.0" type="synapse/inbound-endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/inbound-endpoints/OrdersInboundEP.xml</file>
+    </artifact>
+</artifacts>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="datasource" groupId="org.wso2.OrdersDataSource.datasource" version="1.0.0" type="datasource/datasource" serverRole="DataServicesServer">
+        <file>datasource/datasource.xml</file>
+    </artifact>
+</artifacts>

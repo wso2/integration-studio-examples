@@ -1,0 +1,16 @@
+<datasource>
+    <name>MySQLConnection</name>
+    <description>MySQL Connection</description>
+    <jndiConfig useDataSourceFactory="false">
+        <name>ORDERS_DS</name>
+    </jndiConfig>
+    <definition type="RDBMS">
+        <configuration>
+            <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+            <url>jdbc:mysql://localhost:3306/test_db</url>
+            <username>root</username>
+            <password></password>
+            <defaultAutoCommit>false</defaultAutoCommit>
+        </configuration>
+    </definition>
+</datasource>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>using-transactional-scope-in-jms-to-database</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>org.wso2.developerstudio.eclipse.mavenmultimodule.project.nature</nature>
+	</natures>
+</projectDescription>
