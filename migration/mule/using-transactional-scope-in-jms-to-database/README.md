@@ -29,22 +29,19 @@ If the file write is failed, the transaction is rolled back. Hence, the record i
 3. In the Import window select the **Existing WSO2 Projects into workspace** under **WSO2** folder.
 4. Browse and select the file path to the downloaded sample of this Github project 
 (`integration-studio-examples/migration/mule/using-transactional-scope-in-jms-to-database/UsingTransactionalScopeInJMSToDatabaseRegistry`) and click **finish**.
-5. Let's add the File connector into the workspace. Right click on the **UsingTransactionalScopeInJMSToDatabase** and select 
-**Add or Remove Connector**. Keep the **Add connector** option selected and click **Next>**. Search for 'file' using the 
-search bar and click the download button located at the bottom right corner of the File connector. Click **Finish**.
-6. Open the **datasource.xml** under 
+5. Open the **datasource.xml** under 
 **using-transactional-scope-in-jms-to-database/OrdersDataSource/datasource** directory. 
 Configure the following properties required for the MySQL Connection.
     - url
     - username
     - password
-7. Create the database.
+6. Create the database.
  
 ```
 CREATE DATABASE test_db;
 ```
 
-8. Create the table `orders`.
+7. Create the table `orders`.
 
 ```
 CREATE TABLE orders (
@@ -55,10 +52,10 @@ CREATE TABLE orders (
 );
 ```
 
-9. Configure the JMS transport for JMS listener and sender in EI as instructed [here](https://ei.docs.wso2.com/en/latest/micro-integrator/setup/brokers/configure-with-ActiveMQ/).
-10. Run the sample by right click on the **UsingTransactionalScopeInJMSToDatabaseCompositeApplication** under the main 
+8. Configure the JMS transport for JMS listener and sender in EI as instructed [here](https://ei.docs.wso2.com/en/latest/micro-integrator/setup/brokers/configure-with-ActiveMQ/).
+9. Run the sample by right click on the **UsingTransactionalScopeInJMSToDatabaseCompositeApplication** under the main 
 **using-transactional-scope-in-jms-to-database** project and selecting **Export Project Artifacts and Run**.
-11. Publish the following message to ActiveMQ `in` queue.
+10. Publish the following message to ActiveMQ `in` queue.
 
 ```xml
 <order>
@@ -68,26 +65,11 @@ CREATE TABLE orders (
 </order>
 ```
 
-12. The record will be roll backed as the file write fails. The file write process fails as the destination defined does not exist. Following logs can be observed in the console log.
-
-```
-STATUS = Inserting data to the Database...
-.
-.
-.
-STATUS = Rolling back transaction..., ERROR_MESSAGE = Error occured in the mediation of the class mediator
-```
-
-13. If you query the table using the following command, you can observe that the record has not been inserted.
+11. The record will be roll backed once the script throwing the exception is invoked.
+If you query the table using the following command, you can observe that the record has not been inserted.
 
 ```
 SELECT * FROM orders;
-```
-
-14. If the following parameter of the file connector configuration `fileconnector.append` is updated with an existing location, the mediation will successfully complete and you can observe the message is inserted to the `out` queue.
-
-```
-<destination></destination>
 ```
 
 ### How It Works
@@ -95,12 +77,9 @@ SELECT * FROM orders;
 The Inbound Endpoint `OrdersInboundEP` will listen on the JMS queue named `in` configured in Apache ActiveMQ. 
 
 Upon receiving a message it will invoke `MainSequence` where the message is inserted into the database. 
-Then, a record is appended to a file to indicate that the record was created using the File Connector. But this operation will fail with an error as the destination specified does not exist. As the transaction scope is defined from database insertion till the end of file write, the transaction is committed only after this operation has completed successfully.
+An exception is thrown before the transaction is committed. As the transaction scope is defined from database insertion till the end of script mediator, the transaction is committed only after this operation has completed successfully.
 Once the error is thrown, the `FaultSequence` will be invoked where the transaction is being rolled back. Hence, the database record will not exist and the message will not be forwarded to the `out` queue.
-
-If the destination is updated with a correct location, the file write will succeed and the transaction will be committed. Then, the message is pushed to `out` queue and the record can be observed in the database table as well.
 
 ### Go Further
 
-* Read about File Connector [here](https://docs.wso2.com/display/ESBCONNECTORS/File+Connector)
-* Read more on [WSO2 connectors](https://docs.wso2.com/display/ESBCONNECTORS/WSO2+ESB+Connectors+Documentation)
+* Read more on [Transaction Mediator](https://ei.docs.wso2.com/en/latest/micro-integrator/references/mediators/transaction-Mediator/)
