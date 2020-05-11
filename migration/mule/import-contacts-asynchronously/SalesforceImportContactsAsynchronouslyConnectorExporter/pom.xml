@@ -2,12 +2,12 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.example.SalesforceRestConnector</groupId>
-  <artifactId>SalesforceRestConnector</artifactId>
+  <groupId>com.example.SalesforceImportContactsAsynchronously</groupId>
+  <artifactId>SalesforceImportContactsAsynchronouslyConnectorExporter</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>SalesforceRestConnector</name>
-  <description>SalesforceRestConnector</description>
+  <name>SalesforceImportContactsAsynchronouslyConnectorExporter</name>
+  <description>SalesforceImportContactsAsynchronouslyConnectorExporter</description>
   <properties>
     <CApp.type>synapse/lib</CApp.type>
     <maven.test.skip>false</maven.test.skip>
