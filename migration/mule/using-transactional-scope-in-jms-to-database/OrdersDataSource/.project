@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>OrdersDataSource</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>org.wso2.developerstudio.eclipse.datasource.project.nature</nature>
+	</natures>
+</projectDescription>

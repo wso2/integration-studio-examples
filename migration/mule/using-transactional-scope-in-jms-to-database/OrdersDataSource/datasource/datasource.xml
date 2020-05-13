@@ -1,0 +1,29 @@
+<datasource>
+    <name>MySQLConnection</name>
+    <description>MySQL Connection</description>
+    <jndiConfig useDataSourceFactory="false">
+        <name>ORDERS_DS</name>
+    </jndiConfig>
+    <definition type="RDBMS">
+        <configuration>
+            <dataSourceClassName>com.atomikos.jdbc.AtomikosDataSourceBean</dataSourceClassName>
+            <maxWait>60000</maxWait>
+            <testOnBorrow>true</testOnBorrow>
+            <validationQuery>SELECT 1</validationQuery>
+            <validationInterval>300</validationInterval>
+            <testOnConnect>true</testOnConnect>
+            <testWhileIdle>true</testWhileIdle>
+            <dataSourceProps>
+                <property name="xaDataSourceClassName">com.mysql.cj.jdbc.MysqlXADataSource</property>
+                <property name="uniqueResourceName">test_db</property>
+                <property name="xaProperties.user">root</property>
+                <property name="xaProperties.password"></property>
+                <property name="xaProperties.pinGlobalTxToPhysicalConnection">true</property>
+                <property name="xaProperties.url">jdbc:mysql://localhost:3306/test_db</property>
+                <property name="poolSize">10</property>
+                <property name="testQuery">SELECT 1</property>
+                <property name="xaProperties.connectTimeout">60000</property>
+            </dataSourceProps>
+        </configuration>
+    </definition>
+</datasource>
