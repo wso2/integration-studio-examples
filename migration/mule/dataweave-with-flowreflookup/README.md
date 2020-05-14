@@ -11,7 +11,8 @@ increase your familiarity with Integration Studio, consider completing one or mo
 
 ### Example Use Case
 
-In this example, We read multiple details of an account which are stored in a csv file and transform them within a seperate sequence((Which invokes a script mediator to change specific region field). We will lookup this seperate sequence(Call it using sequence reference) and set transformed output to a property and use that property to build sObject in salesforce using salesforcerest connector.
+In this example, We read multiple details of an account which are stored in a csv file and transform them within a seperate sequence((Which invokes a script mediator to change specific region field). We will lookup this seperate sequence(Call it using sequence reference) and set transformed output to a property and use that property to build sObject in Salesforce using WSO2 Salesforce rest connector. <br>
+<img width="60%" src="../../../docs/assets/images/migration-mule/dataweave-with-flowreflookup-use-case.png">
 
 ### Set Up and Run the Example
 
@@ -23,25 +24,33 @@ In this example, We read multiple details of an account which are stored in a cs
 5. Let's add the Salesforce REST connector into the workspace. Right click on the **dataweavewithflowref** and select 
 **Add or Remove Connector**. Keep the **Add connector** option selected and click **Next>**. Search for 'file' and 'salesforcerest' using the 
 search bar and click the download button located at the bottom right corner of the File and Salesforce REST connectors. Click **Finish**.
-6. Follow these [steps](https://ei.docs.wso2.com/en/latest/micro-integrator/references/connectors/salesforce-rest-connector/sf-access-token-generation/) to generate the Access Tokens for Salesforce and obtain the Access Token, and Refresh Token.
-7. Copy the companies.csv file in **dataweave-with-flowreflookup/dataweavewithflowref/src/main/resources/** directory to location of your choice.
+6. Similarly, add the File Connector to the workspace.
+7. Follow these [steps](https://ei.docs.wso2.com/en/latest/micro-integrator/references/connectors/salesforce-rest-connector/sf-access-token-generation/) to generate the Access Tokens for Salesforce and obtain the Access Token, and Refresh Token.
 8. Open the **FlowRefSequence.xml** under 
 **dataweave-with-flowreflookup/dataweavewithflowref/src/main/synapse-config/sequences/** directory. 
-![dataweavewithflowref]( "dataweavewithflowref")
-Configure the following properties with the previously obtained values.
+<img width="70%" src="../../../docs/assets/images/migration-mule/dataweave-with-flowreflookup.png">
+
+9. Configure the following properties with the previously obtained values.<br>
     - Access Token
     - Refresh Token
     - API URL (e.g.: https://<INSTANCE>.salesforce.com)
 And configure csvFilePath property with the location path to companies.csv file.
-9. Run the sample by right click on the **dataweavewithflowrefCompositeApplication** under the main 
+
+10. Copy the companies.csv file in **dataweave-with-flowreflookup/dataweavewithflowref/src/main/resources/** directory to location of your choice.
+Provide the path to this as the source under **<fileconnector.read>**
+E.g.:
+```xml
+<source>file:///Users/testuser/Desktop/companies.csv</source>
+```
+11. Run the sample by right click on the **dataweavewithflowrefCompositeApplication** under the main 
 **dataweave-with-flowreflookup** project and selecting **Export Project Artifacts and Run**.
-10. Once the sample is run, from your browser, go to the Salesforce account used in the configs, then go to Accounts tab.
-11. Display all Accounts, and search the accounts with the following two entries and you can see those are created.
+12. Once the sample is run, from your browser, go to the Salesforce account used in the configs, then go to Accounts tab.
+13. Display all Accounts, and search the accounts with the following two entries and you can see those are created.
 ```
 WSO2
 WSO2 LK
 ```
-12. Following logs can be observed in the console log.
+14. Following logs can be observed in the console log.
 ```
 State to lookup is: FL
 INFO {org.apache.synapse.mediators.builtin.LogMediator} - Region is  = SouthEast
@@ -51,6 +60,6 @@ INFO {org.apache.synapse.mediators.builtin.LogMediator} - Region is  = WestCoast
 
 ### Go Further
 
-* Learn more about [File Connector](https://docs.wso2.com/display/ESBCONNECTORS/Working+with+the+File+Connector#WorkingwiththeFileConnector-append).
+* Learn more about [File Connector](https://docs.wso2.com/display/ESBCONNECTORS/Working+with+the+File+Connector).
 * Learn more about [Salesforce REST connector](https://docs.wso2.com/display/ESBCONNECTORS/Salesforce+REST+Connector).
 * Read more on [WSO2 connectors](https://docs.wso2.com/display/ESBCONNECTORS/WSO2+ESB+Connectors+Documentation)
