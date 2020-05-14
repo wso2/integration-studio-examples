@@ -8,12 +8,9 @@ This document assumes that you are familiar with WSO2 EI and the [Integration St
 
 ### Example Use Case
 
-This example implementation route the request according the method which was used (GET, POST, PUT, DELETE) and generates dummy message, and a status code. Then we have written a test suite for this API to test the behaviour of each and every resource type in the API.
+This example implementation route the request according the method which was used (GET, POST, PUT, DELETE) and generates dummy message, and a status code. Then we have written a test suite for this API to test the behaviour of each and every resource type in the API.<br>
 
-<p align="center">
-  <img width="70%" src="../../../docs/assets/images/migration-mule/testing-apikit-with-munit.png">
-</p>
-
+<img width="60%" src="../../../docs/assets/images/migration-mule/testing-apikit-with-munit-use-case.png">
 
 ### Set Up and Run the Example
 
@@ -24,6 +21,11 @@ Follow the steps in this procedure to create and run this example in your own in
 3. In the Import window select the **Existing WSO2 Projects into workspace** under **WSO2** folder.
 4. Browse and select the file path to the downloaded sample of this Github project 
 (`integration-studio-examples/migration/mule/testing-apikit-with-munit`) and click **finish**.
+5. Open  **api.xml** under **testing-apikit-with-munit/testing-apikit-with-munit-sample/src/main/synapse-config/api** directory. 
+This example will test the behaviour of every resource in the api.<br> 
+<p align="center">
+  <img width="40%" src="../../../docs/assets/images/migration-mule/testing-apikit-with-munit.png">
+</p>
 
 **NOTE**<br/>
 You have to use micro-integrator version 1.2.0 or higher to run this sample. 
