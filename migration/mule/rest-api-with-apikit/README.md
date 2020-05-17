@@ -9,6 +9,7 @@ This document assumes that you are familiar with the [Integration Studio](https:
 ### Example Use Case ###
 
 This API mocks endpoints for customer entity.
+<img width="70%" src="../../../docs/assets/images/migration-mule/rest-api-with-apikit-use-case.png">
 
 ### Set Up and Run the Example ###
 
@@ -21,17 +22,32 @@ Follow the procedure below to run and test the functionality in Integration Stud
 (``integration-studio-examples/migration/mule/rest-api-with-apikit``) and click **Finish**.
 5. Open the **RestApiWithApikit.xml** under **rest-api-with-apikit/RestApiWithApikit/src/main/synapse-config/api** 
 directory.
-<p align="center">
-  <img width="70%" src="../../../docs/assets/images/migration-mule/rest-api-with-apikit.png">
-</p>
+<img width="30%" src="../../../docs/assets/images/migration-mule/rest-api-with-apikit.png">
 
 6. The **RestApiWithApikit.xml** is the graphical view of the resources of the used API. This design is based on a OAS2.0 swagger file. It is provided in **rest-api-with-apikit/RestApiWithApikit/src/main/resources**. You can refer [Creating a REST API](https://ei.docs.wso2.com/en/latest/micro-integrator/develop/creating-artifacts/creating-an-api/) to create the project from scratch using the swagger file.
 7. Run the sample by right click on the **RestApiWithApikitCompositeApplication** under the main **rest-api-with-apikit** project and selecting **Export Project Artifacts and Run**.
 8. Open HTTP Client in Integration Studio. Follow [HTTP Client Guidelines](../../../docs/common/adding-http-client-to-integration-studio.md)
 to open HTTP Client if the window is not visible in the interface.
 9. Make a GET request to *http://localhost:8290/api/customers*.
+10. You should receive a list of customers as follows.
+```json
+[
+	{
+		"firstName": "John",
+		"lastName": "Doe",
+		"phone": "123456789",
+		"email": "john.doe@email.com"
+	},
+	{
+		"firstName": "Jane",
+		"lastName": "Doe",
+		"phone": "123456789",
+		"email": "jane.doe@email.com"
+	}
+]
+```
 
-You can use a browser extension such as Postman or the curl command line utility. As a response to this request, you should receive a list of customers. You can try out the other resources in the **RestApiWithApikit.xml** to test the behaviour.
+You can try out the other resources in the **RestApiWithApikit.xml** to test the behaviour.
 
 ### How it Works ###
 
