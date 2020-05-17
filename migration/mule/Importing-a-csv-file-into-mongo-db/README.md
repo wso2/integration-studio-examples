@@ -11,35 +11,35 @@ WSO2 EI’s graphical developer tool. To increase your familiarity with Integrat
 And this assumes that you have mongoDB installed already in the machine or in an accessible remote instance.
 
 ### Example Use Case
-In this example we use a scheduled task which fetches a csv file periodically, and adds the data rows to a mongo DB collection. And it will check whether mongo DB colletion exists and if not it will create a collection before adding the record.
-![Importing-a-csv-file-into-mongo-db]()
+In this example we use a scheduled task which fetches a csv file periodically, and adds the data rows to a mongo DB collection. Then it will check whether mongo DB collection exists and if not it will create a collection before adding the record.
+
+<img width="50%" src="../../../docs/assets/images/migration-mule/Importing-a-csv-file-into-mongo-db-use-case.png">
 
 ### Set Up and Run the Example
 
 1. Start WSO2 Integration Studio ([Installing WSO2 Integration Studio](https://ei.docs.wso2.com/en/latest/micro-integrator/develop/installing-WSO2-Integration-Studio/)).
 2. In your menu in Studio, click the **File** menu. In the File menu select the **Import...** item.
 3. In the Import window select the **Existing WSO2 Projects into workspace** under **WSO2** folder.
-4. Browse and select the file path to the downloaded sample of this github project 
-("Importing-a-csv-file-into-mongo-db" folder of the downloaded github repository).
+4. Browse and select the file path to the downloaded sample of this Github project (``integration-studio-examples/migration/mule/Importing-a-csv-file-into-mongo-db``) and click **Finish**.
 5. Lets add the file connector into the workspace. Right click on the **ImportACSVFileIntoMongoDB** and select 
 **Add or Remove Connector**. Keep the **Add connector** option selected and click **Next>**. Search for 'file' using the 
 search bar and click the download button located at the bottom right corner of the file connector. Click **Finish**.
 6. Open the **WriteCSVToMongoDB.xml** under 
 **Importing-a-csv-file-into-mongo-db/ImportACSVFileIntoMongoDB/src/main/synapse-config/sequences/** directory. 
 Copy the input.csv file located in **Importing-a-csv-file-into-mongo-db/ImportACSVFileIntoMongoDB/src/main/resources** directory to a location of your choice. 
+
+<img width="90%" src="../../../docs/assets/images/migration-mule/importing-a-csv-file-into-mongo-db.png">
+
 Replace the csvFilePath property value with the copied path to input.csv.ex:- /Users/user/Desktop/sample/input.csv.
-![Alt text]( "ImportACSVFileIntoMongoDB")
-7. Open the **WriteCSVToMongoDB.xml** under 
-**Importing-a-csv-file-into-mongo-db/ImportACSVFileIntoMongoDB/src/main/synapse-config/sequences/** directory. 
-Copy the input.csv file located in **Importing-a-csv-file-into-mongo-db/ImportACSVFileIntoMongoDB/src/main/resources** directory to a location of your choice. 
-Replace the csvFilePath property value with the copied path to input.csv.ex:- /Users/user/Desktop/sample/input.csv.
-![Alt text]( "ImportACSVFileIntoMongoDB")
-8. Open the **ImportingACSVFileIntoMongoDBDataService.dbs** in **Importing-a-csv-file-into-mongo-db/ImportACSVFileINtoMongoDBDataService/dataservice/** directory.
+
+7. Open the **ImportingACSVFileIntoMongoDBDataService.dbs** in **Importing-a-csv-file-into-mongo-db/ImportACSVFileINtoMongoDBDataService/dataservice/** directory.
 Go to source tab and change the value of mongoDB_servers property to IP address if you are using a remote mongoDB instance.
-9. Run the sample by right click on the **ImportACSVFileIntoMongoDBCompositeApplication** under the main 
+8. Run the sample by right click on the **ImportACSVFileIntoMongoDBCompositeApplication** under the main 
 **Importing-a-csv-file-into-mongo-db** project and selecting **Export Project Artifacts and Run**.
-10. Check the mongoDB instance for customers Collection and the inserted data inside the collection. You can use the below query in the MongoDB Console.
-    db.customers.find()
+9. Check the mongoDB instance for customers Collection and the inserted data inside the collection. You can use the below query in the MongoDB Console.
+```
+db.customers.find()
+```
 
 ### Go Further
 
