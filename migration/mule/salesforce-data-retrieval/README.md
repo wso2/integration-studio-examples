@@ -18,6 +18,8 @@ In this example we can perform the following two types of data data-retrieval op
 
   The form will be provided to you, enter the specific values. In this example use the Salesforce Query to search stored Salesforce data for specific information which is created under `Objects`.
 
+<img width="50%" src="../../../docs/assets/images/migration-mule/salesforce-data-retrieval-use-case.png">
+
 ## Set Up and Run the Example
 
 Follow the steps in this procedure to create and run this example in your own instance of Integration Studio. You can create template applications straight out of the box in Integration Studio and tweak the configurations of the use case-based templates to create your own customized applications in WSO2 Integrator.
@@ -25,12 +27,11 @@ Follow the steps in this procedure to create and run this example in your own in
 1. Start WSO2 Integration Studio. See [Installing WSO2 Integration Studio](https://ei.docs.wso2.com/en/latest/micro-integrator/develop/installing-WSO2-Integration-Studio/) 
 2. In your menu in Studio, click the File menu. In the File menu select the **Import...** item.
 3. In the Import window select the **Existing WSO2 Projects into workspace** under **WSO2** folder.
-4. Browse and select the file path to the downloaded sample of this github project (`salesforce-data-retrival` folder of the downloaded github repository)
-5. Lets add the file connector into the workspace. Right click on the **salesforce-data-retrive** and select **Add or Remove Connector**. Keep the **Add connector** option selected and click **Next>**. Search for 'file' using the search bar and click the download button located at the bottom right corner of the file connector. Click **Finish**.
-6. Similarly, add the Salesforce REST Connector to the workspace.
-7. Follow these [steps](https://ei.docs.wso2.com/en/latest/micro-integrator/references/connectors/salesforce-rest-connector/sf-access-token-generation/) to generate the Access Tokens for Salesforce and obtain the Access Token, and Refresh Token.
-8. Open the **salesforceIdRetrievalFlow.xml** and **describeGlobal.xml** under **salesforce-data-retrieval/salesforce-data-retrive/src/main/synapse-config/sequences** directory.
-9. Add the property values into the `init` operation as shown bellow. Replace the `clientSecret`, `clientId`, `accessToken`, `refreshToken` with obtained values from step 7.
+4. Browse and select the file path to the downloaded sample of this Github project (``integration-studio-examples/migration/mule/salesforce-data-retrieval``) and click **Finish**.
+5. Lets add the Salesforce REST connector into the workspace. Right click on the **salesforce-data-retrive** and select **Add or Remove Connector**. Keep the **Add connector** option selected and click **Next>**. Search for 'salesforce' using the search bar and click the download button located at the bottom right corner of the Salesforce REST connector. Click **Finish**.
+6. Follow these [steps](https://ei.docs.wso2.com/en/latest/micro-integrator/references/connectors/salesforce-rest-connector/sf-access-token-generation/) to generate the Access Tokens for Salesforce and obtain the Access Token, and Refresh Token.
+7. Open the **salesforceIdRetrievalFlow.xml** and **describeGlobal.xml** under **salesforce-data-retrieval/salesforce-data-retrive/src/main/synapse-config/sequences** directory.
+8. Add the property values into the `init` operation in **describeGlobal.xml** as given below. Replace the `clientSecret`, `clientId`, `accessToken`, `refreshToken` with obtained values from step 6.
    
    **Initialize the connector**
    
@@ -47,7 +48,7 @@ Follow the steps in this procedure to create and run this example in your own in
    </salesforcerest.init>
    ```
 
-10. Please find the following graphical view of the `salesforce-data-retrival` sample.  
+9. Please find the following graphical view of the `salesforce-data-retrival` sample.  
     
     **salesforce-data-retrieval.xml**
     
@@ -67,10 +68,10 @@ Follow the steps in this procedure to create and run this example in your own in
           <img width="50%" src="../../../docs/assets/images/migration-mule/salesforce-data-retrieval-flow-sequence.png">
     </p>
    
-11. Run the sample by right clicking on the **salesforce-data-retrive** project and selecting **Run as -> Run On Micro Integrator**.
+10. Run the sample by right clicking on the **salesforce-data-retrive** project and selecting **Run as -> Run On Micro Integrator**.
 
-12. Invok the create `salesforce-data-retrieval` API as shown below. 
-    Open your browser and hit `http://localhost:8290/listener/`.The form will be provided to you, containing following values:
+11. Invoke the create `salesforce-data-retrieval` API as shown below. 
+    Open your browser and hit *http://localhost:8290/listener/*. The form will be provided to you, containing following values:
     
     <p align="center">
       <img width="50%" src="../../../docs/assets/images/migration-mule/salesforce-data-retrive-from.png">
@@ -81,13 +82,13 @@ Follow the steps in this procedure to create and run this example in your own in
       * Search Key - a valid field name for the given object you wil use for matching, e.g. Name for BillingState.
       * Search Value - a value for the Search Key field that will be used for matching, e.g. FL
 
-13. Click **Submit** button.
+12. Click **Submit** button.
 
-14. You will see the retrieved data as shown bellow.
+13. You will see the retrieved data as shown bellow.
     ```
     {"QueryResult":{"done":true,"records":[{"@type":"Account","@url":"/services/data/v44.0/sobjects/Account/0012x000004A8yNAAS","Id":"0012x000004A8yNAAS","Name":"WSO2","BillingState":"FL"},{"@type":"Account","@url":"/services/data/v44.0/sobjects/Account/0012x000004A8xWAAS","Id":"0012x000004A8xWAAS","Name":"WSO2","BillingState":"FL"},{"@type":"Account","@url":"/services/data/v44.0/sobjects/Account/0012x000004A9lwAAC","Id":"0012x000004A9lwAAC","Name":"WSO2","BillingState":"FL"}],"totalSize":3}}
     ```
-15. In case of invalid input, the message shown as bellow.
+14. For an invalid input, an error message will be responded as follows.
     
     ```
     {"Error":"Invalid Salesforce query."}
