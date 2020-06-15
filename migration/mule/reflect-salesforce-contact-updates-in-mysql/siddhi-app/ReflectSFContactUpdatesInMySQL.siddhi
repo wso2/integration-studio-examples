@@ -1,0 +1,51 @@
+
+@App:name('ReflectSFContactUpdatesInMySQL')
+
+@sink(type = 'http-call', sink.id = "1", publisher.url = "https://<your_salesforce_instance>.salesforce.com/services/data/v29.0/sobjects/Contact/updated/?start={{encodedStartUtc}}&end={{encodedEndUtc}}", method = "GET", headers = "'Authorization: Bearer <your_access_token>'", 
+	@map(type = 'json'))
+define stream ContactUpdatesRequestStream (encodedStartUtc string, encodedEndUtc string);
+
+@source(type = 'http-call-response', sink.id = "1", @map(type = 'json', @attributes(response = "$")))
+define stream UpdatedContactIdsStream (response object);
+
+@sink(type = 'http-call', sink.id = "2", publisher.url = "https://<your_salesforce_instance>.salesforce.com/services/data/v20.0/sobjects/Contact/{{contactId}}", method = "GET", headers = "'Authorization: Bearer <your_access_token>'", 
+	@map(type = 'json'))
+define stream ContactRequestStream (contactId string);
+
+@source(type = 'http-call-response', sink.id = "2", @map(type = 'json', @attributes(ModifiedAt = "LastModifiedDate", Id = "Id", Name = "Name")))
+define stream ContactResponseStream (Id string, Name string, ModifiedAt string);
+
+@store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/salesforce?useSSL=false", username = "wso2", password = "wso2123", jdbc.driver.name = "com.mysql.jdbc.Driver")
+define table CONTACTS (Id string, Name string, LastModifiedAt string);
+
+@sink(type='log', prefix='No of Updated Events')
+define stream UpdatesCountStream(count long);
+
+define trigger Poller at every 1 min;
+
+@info(name = 'timestampsGenerator')
+from Poller#log('Polling for updates')
+select str:replaceAll(time:dateFormat((time:timestampInMilliseconds(time:utcTimestamp(), 'yyyy-MM-dd HH:mm:ss') - 60000), "yyyy-MM-dd'T'HH:mm:ss'%2B0000'"), ':', '%3A') as encodedStartUtc, str:replaceAll(time:dateFormat(time:utcTimestamp(), "yyyy-MM-dd'T'HH:mm:ss'%2B0000'", 'yyyy-MM-dd HH:mm:ss'), ':', '%3A') as encodedEndUtc 
+insert into ContactUpdatesRequestStream;
+
+@info(name = 'contactIdTokenizer')
+from UpdatedContactIdsStream#json:tokenize(response, '$.ids') 
+select json:getString(jsonElement, '@') as contactId
+insert into TokenizedContactIdsStream;
+
+@info(name = 'contactRequester')
+from TokenizedContactIdsStream
+select *
+insert into ContactRequestStream;
+
+@info(name='updatesCounter')
+from TokenizedContactIdsStream#window.batch()
+select count() as count
+insert into UpdatesCountStream;
+
+@info(name = 'dbUpserter')
+from ContactResponseStream
+select Id, Name, ModifiedAt as LastModifiedAt 
+update or 
+insert into CONTACTS for current events 
+	on Id == CONTACTS.Id;

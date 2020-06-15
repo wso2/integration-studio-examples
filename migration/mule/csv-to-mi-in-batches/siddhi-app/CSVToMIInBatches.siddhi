@@ -1,0 +1,25 @@
+@App:name("CSVToMIInBatches")
+
+@source(type='file', mode='line', tailing='false', dir.uri='file:/path/to/your/source-dir', action.after.process='move', move.after.process='file:/path/to/your/moved-dir', @map(type='csv', delimiter=',', @attributes(Salutation = '0', FirstName = '1', LastName = '2', Phone = '3', eof = 'trp:eof')))
+define stream FileReaderStream(Salutation string, FirstName string, LastName string, Phone string, eof string);
+
+@sink(type='grpc-call', publisher.url = 'grpc://localhost:8888/org.wso2.grpc.EventService/process/inSeq', sink.id= '1', headers='Content-Type:json',
+    @map(type='json', @payload("""{"Salutation":"{{Salutation}}","FirstName":"{{FirstName}}","LastName":"{{LastName}}","Phone":"{{Phone}}"}""")))
+define stream MIStream (Salutation string, FirstName string, LastName string, Phone string);
+
+@source(type='grpc-call-response', sink.id= '1', @map(type='json'))
+define stream MIResponseStream (Salutation string, FirstName string, LastName string, Phone string);
+
+@sink(type='log', prefix='Response from MI: ')
+define stream LogStream (Salutation string, FirstName string, LastName string, Phone string);
+
+@info(name='mi_publisher')
+from FileReaderStream#window.expressionBatch("count() % 10 != 0 and eof != 'true'", true)
+select Salutation, FirstName, LastName, Phone
+insert into MIStream;
+
+@info(name='mi_response_logger')
+from MIResponseStream
+select *
+insert into LogStream
+
