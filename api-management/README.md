@@ -1,9 +1,9 @@
 # API Management Tutorial
 
-This tutorial is an extension to the WSO2 United Airport tutorial (WUA) series. It is focused to cover the advanced features of WSO2 API Manager using relevant user stories.
+This tutorial is an extension to the WSO2 United Airport tutorial (WUA) series. It aims to cover the advanced features of WSO2 API Manager using relevant user stories.
 
 ## Overview
-_WSO2 United Airport is a platform which exposes flights from different airlines. The airport has partnered with Delta Airlines and Qantas Airlines. The airlines will be provided with the features of checking the available flights, adding a new flight, updating an existing flight and deleting a flight through the API gateway platform provided by the WUA._
+_WSO2 United Airport is a platform that exposes flights from different airlines. The airport has partnered with Delta Airlines and Qantas Airlines. The airlines have features that enable you to check the available flights, add a new flight, update an existing flight, and delete a flight through the API gateway platform provided by the WUA._
 
 In this series, the following sections will be covered.
 
