@@ -1,6 +1,6 @@
 # Streaming Integration Examples
 
-WSO2 Streaming Integration examples contains a set of examples that showcase the capabilities of the product.
+WSO2 Streaming Integration examples showcase the capabilities of the WSO2 Streaming Integration offering.
 
 Following are the list of examples provided in this repository
 
