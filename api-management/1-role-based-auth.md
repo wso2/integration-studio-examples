@@ -141,4 +141,4 @@ This tutorial is part of a tutorial series on API advanced features.
 
 You can start from the [tutorial overview](README.md).
 
-The next tutorial is on [Blacklisting a user/application](2-blacklisting.md).
+The next tutorial is on [Blocking a user/application](2-blocking.md).

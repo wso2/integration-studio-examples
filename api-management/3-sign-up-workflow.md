@@ -148,6 +148,6 @@ The addition of workflows provides control over the processes while providing th
 
 This tutorial is part of a tutorial series on API advanced features.
 
-The previous tutorial is on [Blacklisting a User/Application](2-blacklisting.md).
+The previous tutorial is on [Blocking a User/Application](2-blocking.md).
 
 The next tutorial is on [Managing Multiple Tenants using API Manager](4-manage-tenants.md).
