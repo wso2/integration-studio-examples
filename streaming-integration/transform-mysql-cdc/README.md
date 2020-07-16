@@ -2,29 +2,29 @@
 This example shows how to use WSO2 Streaming Integrator's Change Data Capturing capability to detect insertion of records in a MySQL table, transform the records with more information available in other MySQL tables, and insert the transformed record to another MySQL table. 
 
 ### Assumptions
-This document assumes that you are familiar with WSO2 Streaming Integrator Tooling's interface, and configuring properties of elements from the Design View.
+This document assumes that you are familiar with the WSO2 Streaming Integrator Tooling interface and configuring properties of elements from the Design View.
 
 ### Example Use Case ###
-This document explains about a manufacturer who accepts product orders containing an order ID, retailer ID and product IDs from retailers, and creates order reports after identifying the retailer's name and product names, as soon as the order is received.
+This document explains about a manufacturer who accepts product orders containing an order ID, retailer ID, and product IDs from retailers and creates order reports after identifying the retailer's name and product names as soon as the order is received.
 
 <img src="../../resources/images/streaming/transform-mysql-cdc-use-case.png">
 
 ### Set Up and Run the Example
 
-To follow along with steps in this example, you must have MySQL installed on your computer, and binary logging should be enabled which you can do by following [this guide](https://debezium.io/docs/connectors/mysql/#enabling-the-binlog) if you haven't done.
+To follow along with steps in this example, you must have MySQL installed on your computer. Also, binary logging should be enabled, which you can do by following [this guide](https://debezium.io/docs/connectors/mysql/#enabling-the-binlog), if you have not done so already.
 
 #### Preparing the MySQL Database
 
-1. Make sure to have a user with SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT privileges. You can create a user with: 
+1. Make sure to have a user with SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT privileges. You can create such a user with: 
 ```
 GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2' IDENTIFIED BY 'wso2123';
 ```
-2. Run the provided `data.sql` in your MySQL instance to create the database and tables, and populate the tables with sample data. This will create a database called `ETL`, with tables: `RETAILERS`, `PRODUCTS`, `ORDERS`, `ORDER_REPORTS`. `RETAILERS` and `PRODUCTS` will be populated with sample data.
+2. Run the provided `data.sql` in your MySQL instance to create the database and tables, and populate the tables with sample data. This will create a database called `ETL`, with tables: `RETAILERS`, `PRODUCTS`, `ORDERS`, `ORDER_REPORTS`. `RETAILERS` and `PRODUCTS`, which will be populated with sample data.
 
 #### Configuring SI Tooling
 
 1. Enable state persistence by setting `enabled: true` under `state.persistence` in `<SI_HOME>/conf/server/deployment.yaml`.
-2. Start WSO2 Streaming Integrator Tooling by going to the `<SI_HOME>/bin` directory, and executing `./tooling.sh` command.
+2. Start WSO2 Streaming Integrator Tooling by going to the `<SI_HOME>/bin` directory, and executing the `./tooling.sh` command.
 3. Go to _Tools -> Extension Installer_, search for the following extensions and install them:
   - Change Data Capture - MySQL
   - RDBMS - MySQL
@@ -41,7 +41,7 @@ The Siddhi app contains the following values configured by default. You can skip
         - jdbc.url: `jdbc:mysql://<MySQL_Host>:3306/etl?useSSL=false`
         - username: `<your_mysql_username>`
         - password: `<your_mysql_password>`
-7. Switch back to the code view by clicking the **Code View** button, and save the Siddhi app.
+7. Switch back to the code view by clicking the **Code View** button and save the Siddhi app.
 
 
 #### Running the Example and Observing the Results
