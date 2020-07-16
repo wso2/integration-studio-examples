@@ -72,7 +72,7 @@ Alternatively you can use [WSO2 Business Process Server](http://wso2.com/product
 3.1. Log in to API-M management console ( https://<Server-Host>:9443/carbon ) and select **Browse** under **Resources**.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/sign-up-workflow-3.png">
+  <img width="30%" src="../resources/images/apim/sign-up-workflow-3.png">
 </p>
 
 3.2. Copy **/_system/governance/apimgt/applicationdata/workflow-extensions.xml** and paste it into the **Location** field and click **Go**.
@@ -98,7 +98,7 @@ Alternatively you can use [WSO2 Business Process Server](http://wso2.com/product
 4.2. Click **Sign-in** and click **Create Account**.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/sign-up-workflow-6.png">
+  <img width="40%" src="../resources/images/apim/sign-up-workflow-6.png">
 </p>
 
 4.3. Enter a valid available username and click **Proceed to Self Register**.
@@ -106,7 +106,7 @@ Alternatively you can use [WSO2 Business Process Server](http://wso2.com/product
 * Username → JohnDoe
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/sign-up-workflow-7.png">
+  <img width="40%" src="../resources/images/apim/sign-up-workflow-7.png">
 </p>
 
 4.4. Enter the details and press **Register**.
@@ -117,7 +117,7 @@ Alternatively you can use [WSO2 Business Process Server](http://wso2.com/product
 * Email       → email@abc.com
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/sign-up-workflow-8.png">
+  <img width="40%" src="../resources/images/apim/sign-up-workflow-8.png">
 </p>
 
 4.5. The account will be registered to the system.
@@ -127,7 +127,7 @@ Alternatively you can use [WSO2 Business Process Server](http://wso2.com/product
 4.7. You will be prompted with a dialog box with Forbidden message.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/sign-up-workflow-9.png">
+  <img width="40%" src="../resources/images/apim/sign-up-workflow-9.png">
 </p>
 
 4.8. Navigate to the API Manager Admin Portal https://localhost:9443/admin and login to the portal using admin/admin credentials.
@@ -148,6 +148,6 @@ The addition of workflows provides control over the processes while providing th
 
 This tutorial is part of a tutorial series on API advanced features.
 
-The previous tutorial is on [Blacklisting a User/Application](2-blacklisting.md).
+The previous tutorial is on [Blocking a User/Application](2-blocking.md).
 
 The next tutorial is on [Managing Multiple Tenants using API Manager](4-manage-tenants.md).

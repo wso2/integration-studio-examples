@@ -3,7 +3,7 @@
 _The new partners of WSO2 United Airport, Delta Airlines and Qantas Airlines both do not use REST/SOAP as their APIs. Delta Airlines are developing a new mobile application for booking flights and they are planning to use GraphQL for the APIs as it provides developers more freedom to request for specific data they require. On the other hand, Qantas Airlines is implementing a chat application for communication between flights and ground staff using WebSocket APIs. Therefore, the airport is required to provide the facilities to accommodate the publishing and managing of the required API protocol types._
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-0.png">
+  <img width="50%" src="../resources/images/apim/protocol-support-0.png">
 </p>
 
 ## Create a GraphQL API using Publisher
@@ -17,19 +17,19 @@ GraphQL is a data query language developed internally by Facebook which provides
 1.2. Click **CREATE API** and then click **I Have a GraphQL SDL schema**.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-1.png">
+  <img width="50%" src="../resources/images/apim/protocol-support-1.png">
 </p>
 
 1.3. Import the schema and click **Next**. (You can download the StarWarsAPI schema definition for this tutorial)
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-2.png">
+  <img width="50%" src="../resources/images/apim/protocol-support-2.png">
 </p>
 
 > **Note:** You need to define the SDL Schema based on the GraphQL schema design best practices. The file extension can be either .graphql, .txt, or .json.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-3.png">
+  <img width="50%" src="../resources/images/apim/protocol-support-3.png">
 </p>
 
 1.4. Enter the GraphQL API related details as follows and click **Create**.
@@ -41,7 +41,7 @@ GraphQL is a data query language developed internally by Facebook which provides
 * Business Plan(s)  → Unlimited
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-4.png">
+  <img width="50%" src="../resources/images/apim/protocol-support-4.png">
 </p>
 
 1.5. You can modify the existing GraphQL schema definition.
@@ -98,7 +98,7 @@ You will be provided with the capability to add RateLimiting, to create and add 
 3.8. Copy the Access Token.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-9.png">
+  <img width="40%" src="../resources/images/apim/protocol-support-9.png">
 </p>
 
 3.9. Copy the Access Token.
@@ -150,7 +150,7 @@ WebSocket is a protocol similar to HTTP that is part of the HTML5 specification.
 1.2. Click **CREATE API** and then click **Design a New WebSocket API**.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-12.jpg">
+  <img width="50%" src="../resources/images/apim/protocol-support-12.jpg">
 </p>
 
 1.3. Enter the following details in **Create a WebSocket API** form and click **CREATE & PUBLISH**. (If you want to change endpoint configurations such as [Endpoint Timeouts](https://apim.docs.wso2.com/en/latest/learn/design-api/endpoints/resiliency/endpoint-timeouts/), [Endpoint Suspension](https://apim.docs.wso2.com/en/latest/learn/design-api/endpoints/resiliency/endpoint-suspension) and [Prevent API Suspension](https://apim.docs.wso2.com/en/latest/learn/design-api/endpoints/resiliency/prevent-api-suspension), you can create the API first and after changing the configurations then publish. Since we are keeping the configuration as default we are publishing the API from the creation.)
@@ -162,7 +162,7 @@ WebSocket is a protocol similar to HTTP that is part of the HTML5 specification.
 * Business Plan(s)    → Silver, Gold
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-13.png">
+  <img width="50%" src="../resources/images/apim/protocol-support-13.png">
 </p>
 
 #### 2. Invoke a WebSocket API

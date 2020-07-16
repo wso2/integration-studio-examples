@@ -15,7 +15,7 @@ Let's take a look at the different levels of throttling:
 Subscription-level throttling tiers can be applied for an API when creating APIs using the API Publisher portal.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/throttling-access-control-0.png">
+  <img width="50%" src="../resources/images/apim/throttling-access-control-0.png">
 </p>
 
 The default subscription level throttling tiers are as follows:
@@ -63,7 +63,7 @@ It is also possible to specify a bandwidth per unit time instead of a number of 
 Application-level throttling tiers are defined at the time an application is created in the **Developer Portal** as shown below. The limits are restricted per token for a specific application.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/throttling-access-control-4.png">
+  <img width="50%" src="../resources/images/apim/throttling-access-control-4.png">
 </p>
 
 An application is a logical collection of one or more APIs and is required to subscribe to an API. Applications allow you to use a single access token to invoke a collection of APIs and to subscribe to one API multiple times with different SLA levels.

@@ -8,7 +8,7 @@ _WSO2 United Airport is a platform that exposes flights from different airlines.
 In this series, the following sections will be covered.
 
 1. [Adding Role-based Access Control for the APIs](1-role-based-auth.md)
-2. [Blacklisting a User/Application](2-blacklisting.md)
+2. [Blocking a User/Application](2-blocking.md)
 3. [Adding a User Sign Up Workflow](3-sign-up-workflow.md)
 4. [Managing Multiple Tenants](4-manage-tenants.md)
 5. [Different API Protocol Support](5-supported-protocols.md)
