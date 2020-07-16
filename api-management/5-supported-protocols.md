@@ -3,7 +3,7 @@
 _The new partners of WSO2 United Airport, Delta Airlines and Qantas Airlines both do not use REST/SOAP as their APIs. Delta Airlines are developing a new mobile application for booking flights and they are planning to use GraphQL for the APIs as it provides developers more freedom to request for specific data they require. On the other hand, Qantas Airlines is implementing a chat application for communication between flights and ground staff using WebSocket APIs. Therefore, the airport is required to provide the facilities to accommodate the publishing and managing of the required API protocol types._
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/protocol-support-0.jpg">
+  <img width="70%" src="../resources/images/apim/protocol-support-0.png">
 </p>
 
 ## Create a GraphQL API using Publisher
