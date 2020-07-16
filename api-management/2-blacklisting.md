@@ -3,7 +3,7 @@
 _The airport platform analysts identify that a user is misbehaving with a user account with a created application. Therefore, they are required to blacklist the application user temporarily._
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/blacklisting-0.jpg">
+  <img width="70%" src="../resources/images/apim/blacklisting-0.png">
 </p>
 
 #### 1. Add a Blacklist Policy from Admin Portal

@@ -3,7 +3,7 @@
 _Qantas Airlines has decided to open the registration to outside users since it can be a burden to enter all the details for every single user/consumer. Therefore, they request an approval workflow for user registration in such a way that the users will be registered to the system when a user with administrative privileges approves their registration after a manual validation of the user. (A manual validation can consist of a simple process such as checking validity of the email address to a complicated process such as waiting for a registration payment, a background check contacting the user by the provided telephone number or validating the address of the user similar to banks)_
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/sign-up-workflow-0.jpg">
+  <img width="70%" src="../resources/images/apim/sign-up-workflow-0.png">
 </p>
 
 #### 1. Configuring WSO2 Enterprise Integrator

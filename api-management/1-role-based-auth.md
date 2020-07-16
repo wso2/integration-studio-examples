@@ -3,7 +3,7 @@
 _All the employees in the airline company have access to the end-user application where they can view the flight details.  All the staff in the airlines should be able to check the available flights whereas only the staff with admin privileges can add, edit or remove existing flights._ 
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/role-based-auth-0.jpg">
+  <img width="70%" src="../resources/images/apim/role-based-auth-0.png">
 </p>
 
 #### 1. Create a new scope

@@ -5,7 +5,7 @@ _Since Delta Airlines and Qantas Airlines are competitors, they request dedicate
 The goal of multi-tenancy is to maximize resource sharing by allowing multiple users (tenants) to log in and use a single server/cluster at the same time, in a tenant-isolated manner. That is, each user is given the experience of using his/her own server, rather than a shared environment. Multitenancy ensures optimal performance of the system's resources such as memory and hardware and also secures each tenant's personal data.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/manage-tenants-0.jpg">
+  <img width="70%" src="../resources/images/apim/manage-tenants-0.png">
 </p>
 
 #### 1. Create a new Tenant
