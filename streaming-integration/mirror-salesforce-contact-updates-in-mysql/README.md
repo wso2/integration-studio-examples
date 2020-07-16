@@ -2,16 +2,16 @@
 This example shows how to poll for contact updates in Salesforce from WSO2 Streaming Integrator, and mirror them in a MySQL table.
 
 ### Assumptions
-This document assumes that you are familiar with WSO2 Streaming Integrator Tooling's interface, and configuring properties of elements from the Design View.
+This document assumes that you are familiar with the WSO2 Streaming Integrator Tooling interface, and configuring properties of elements from the Design View.
 
 ### Example Use Case
-This document explains about a business that maintains a copy of Salesforce contacts in a MySQL table. When a contact is added or updated in Salesforce, the same change is reflected in the MySQL table. This makes sure that contacts are always in sync across Salesforce and the MySQL table.
+This document considers a scenario about a business that maintains a copy of Salesforce contacts in a MySQL table. When a contact is added or updated in Salesforce, the same change is reflected in the MySQL table. This makes sure that contacts are always in sync across Salesforce and the MySQL table.
 
 <img src="../../resources/images/streaming/reflect-salesforce-contact-updates-in-mysql-use-case.png">
 
 ### Set Up and Run the Example
 
-To follow along with steps in this example, you must have MySQL installed on your computer.
+To follow the steps in this example, you must have MySQL installed.
 
 #### Preparing the MySQL Database
 1. Run the provided `data.sql` in your MySQL instance to create the database and the table. This will create a database called `SALESFORCE`, with a table called `CONTACTS`.
@@ -28,7 +28,7 @@ To follow along with steps in this example, you must have MySQL installed on you
     - jdbc.url: `jdbc:mysql://<MySQL_Host>:3306/etl?useSSL=false`
     - username: `<your_mysql_username>`
     - password: `<your_mysql_password>`
-7. Switch back to the code view by clicking the **Code View** button, and save the Siddhi app.
+7. Switch back to the code view by clicking the **Code View** button and save the Siddhi app.
 
 #### Running the Example and Observing the Results
 1. Verify that there are no existing records in your `CONTACTS` MySQL table, by executing `SELECT * FROM CONTACTS;`.
@@ -68,7 +68,7 @@ No of Updated Events : Event{timestamp=1591962035161, data=[1], isExpired=false}
 ```
 
 ### How it Works
-The following steps outline how an update in Salesforce contact is reflected in the MySQL table:
-1. The trigger executes for every 1 minute, and requests for IDs of contacts updated during the previous minute, from Salesforce.
+The following steps outline how an update to a Salesforce contact is reflected in the MySQL table:
+1. The trigger executes every minute and requests for IDs of contacts updated during the previous minute from Salesforce.
 2. After receiving contact IDs, details of contacts denoted by each contact ID are requested from Salesforce.
 3. Based on the existence of a contact with the received ID in the `CONTACTS` table, existing contact details are updated, or a new record is inserted.
