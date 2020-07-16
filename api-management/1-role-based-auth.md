@@ -3,7 +3,7 @@
 _All the employees in the airline company have access to the end-user application where they can view the flight details.  All the staff in the airlines should be able to check the available flights whereas only the staff with admin privileges can add, edit or remove existing flights._ 
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/role-based-auth-0.png">
+  <img width="40%" src="../resources/images/apim/role-based-auth-0.png">
 </p>
 
 #### 1. Create a new scope
@@ -77,13 +77,13 @@ The requirement of the airlines company is to provide the flight creating, updat
 3.7. Click **GENERATE ACCESS TOKEN** and select the required scopes, in this case write_flights from the drop down menu.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/role-based-auth-7.png">
+  <img width="40%" src="../resources/images/apim/role-based-auth-7.png">
 </p>
 
 3.8. Click **GENERATE** and copy the Access Token.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/role-based-auth-8.png">
+  <img width="40%" src="../resources/images/apim/role-based-auth-8.png">
 </p>
 
 3.9. Click **Try Out** to navigate to the API Console.
@@ -124,7 +124,7 @@ The requirement of the airlines company is to provide the flight creating, updat
 3.14. Go back to the Subscriptions section, and generate a new access token without any scopes. Copy the generated access token.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/role-based-auth-12.png">
+  <img width="40%" src="../resources/images/apim/role-based-auth-12.png">
 </p>
 
 3.15. Try out the /flights POST method with the use of the copied access token.

@@ -3,7 +3,7 @@
 _The airport platform analysts identify that a user is misbehaving with a user account with a created application. Therefore, they are required to block the application user temporarily._
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/blocking-0.png">
+  <img width="40%" src="../resources/images/apim/blocking-0.png">
 </p>
 
 #### 1. Add a Deny Policy from Admin Portal
@@ -23,7 +23,7 @@ API Manager provides the ability to block an API context, an application, an IP 
 1.4. Enter **admin:DefaultApplication** as the Value.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/blocking-2.png">
+  <img width="40%" src="../resources/images/apim/blocking-2.png">
 </p>
 
 1.5. Click **Deny**.

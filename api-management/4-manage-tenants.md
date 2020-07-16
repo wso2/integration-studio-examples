@@ -5,7 +5,7 @@ _Since Delta Airlines and Qantas Airlines are competitors, they request dedicate
 The goal of multi-tenancy is to maximize resource sharing by allowing multiple users (tenants) to log in and use a single server/cluster at the same time, in a tenant-isolated manner. That is, each user is given the experience of using his/her own server, rather than a shared environment. Multitenancy ensures optimal performance of the system's resources such as memory and hardware and also secures each tenant's personal data.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/manage-tenants-0.png">
+  <img width="40%" src="../resources/images/apim/manage-tenants-0.png">
 </p>
 
 #### 1. Create a new Tenant
@@ -13,7 +13,7 @@ The goal of multi-tenancy is to maximize resource sharing by allowing multiple u
 1.1. Log in to the API-M management console (https://localhost:9443/carbon) and Click **Add New Tenant** in the **Configure** tab.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/manage-tenants-1.png">
+  <img width="20%" src="../resources/images/apim/manage-tenants-1.png">
 </p>
 
 1.2. Create Tenant domains delta.corp for Delta Airlines and qantas.corp for Qantas Airlines. (The following details were used for delta.corp domain)
@@ -57,7 +57,7 @@ The goal of multi-tenancy is to maximize resource sharing by allowing multiple u
 * Business Plan(s)  → Gold, Unlimited
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/manage-tenants-5.png">
+  <img width="50%" src="../resources/images/apim/manage-tenants-5.png">
 </p>
 
 2.4. Click **CREATE & PUBLISH**.
@@ -67,7 +67,7 @@ The goal of multi-tenancy is to maximize resource sharing by allowing multiple u
 3.1. Navigate to API Dev Portal https://localhost:9443/devportal. The Developer Portal fronts of all the registered tenant domains are listed on the landing page.
 
 <p align="center">
-  <img width="70%" src="../resources/images/apim/manage-tenants-6.png">
+  <img width="40%" src="../resources/images/apim/manage-tenants-6.png">
 </p>
 
 This is referred to as the public developer portal. Each icon here is linked to the API developer portal of a registered tenant, including the super tenant, which is carbon.super.
