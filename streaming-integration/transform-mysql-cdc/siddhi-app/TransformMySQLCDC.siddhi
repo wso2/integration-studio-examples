@@ -1,0 +1,39 @@
+@App:name('TransformMySQLCDC')
+
+@source(type = 'cdc', url = "jdbc:mysql://localhost:3306/etl2?useSSL=false", username = "wso2", password = "wso2123", table.name = "ORDERS", operation = "insert", 
+	@map(type = 'keyvalue', 
+		@attributes(RetailerID = "RetailerID", ProductIDs = "ProductIDs", OrderID = "OrderID")))
+define stream OrderInsertListenerStream (OrderID string, RetailerID string, ProductIDs string);
+
+@store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/etl2?useSSL=false", username = "wso2", password = "wso2123", jdbc.driver.name = "com.mysql.jdbc.Driver")
+define table PRODUCTS (ProductID string, Product string);
+
+@store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/etl2?useSSL=false", username = "wso2", password = "wso2123", jdbc.driver.name = "com.mysql.jdbc.Driver")
+define table RETAILERS (RetailerID string, Retailer string);
+
+@store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/etl2?useSSL=false", username = "wso2", password = "wso2123", jdbc.driver.name = "com.mysql.jdbc.Driver")
+define table ORDER_REPORTS (OrderID string, Retailer string, Products string);
+
+@info(name = 'insertedOrderRetailerIdentifier')
+from OrderInsertListenerStream as I 
+join RETAILERS as R 
+	on I.RetailerID == R.RetailerID 
+select I.OrderID as OrderID, I.ProductIDs as ProductIDs, R.Retailer as Retailer 
+insert into RetailerMatchedOrdersStream;
+
+@info(name = 'ProductIDTokenizer')
+from RetailerMatchedOrdersStream#str:tokenize(ProductIDs, ',') 
+select OrderID, token as ProductID, Retailer 
+insert into TokenizedProductsStream;
+
+@info(name = 'ProductIdentifier')
+from TokenizedProductsStream as T 
+join PRODUCTS as P 
+	on T.ProductID == P.ProductID 
+select T.OrderID as OrderID, T.Retailer as Retailer, P.Product as Product 
+insert into ProductIdentifiedStream;
+
+@info(name = 'OrderReportGenerator')
+from ProductIdentifiedStream#window.batch() 
+select OrderID, Retailer, str:groupConcat(Product, ',') as Products 
+insert into ORDER_REPORTS;

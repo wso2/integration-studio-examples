@@ -35,10 +35,8 @@
         </license>
     </licenses>
 
-    <modules>
-        <module>doc-generator</module>
-    </modules>
-
+    <modules></modules>
+    
     <repositories>
         <repository>
             <id>wso2.releases</id>

@@ -1,0 +1,51 @@
+@App:name('SalesforceLeadsFromCSV')
+
+@sink(type = 'log', prefix = "File Summary", 
+	@map(type = 'text', 
+		@payload("{{statusCount}} Leads in File: {{fileName}}")))
+define stream FileSummaryLogStream (statusCount string, fileName string);
+
+@source(type = 'file', mode = "line", tailing = "false", dir.uri = "file:/path/to/your/source-dir", action.after.process = "move", move.after.process = "file:/path/to/your/moved-dir", 
+	@map(type = 'csv', delimiter = ",", 
+		@attributes(Company = "3", fileName = "trp:file.path", Email = "0", FirstName = "1", LastName = "2", eof = "trp:eof")))
+define stream FileReaderStream (Email string, FirstName string, LastName string, Company string, eof string, fileName string);
+
+@sink(type = 'http-call', sink.id = "2", publisher.url = "https://<your_salesforce_instance>.salesforce.com/services/data/v20.0/sobjects/Lead/", method = "POST", headers = "'Authorization: Bearer <your_salesforce_access_token>'", 
+	@map(type = 'json', 
+		@payload("""{"Email":"{{Email}}","FirstName":"{{FirstName}}","LastName":"{{LastName}}","Company":"{{Company}}"}""")))
+define stream LeadInsertionStream (Email string, FirstName string, LastName string, Company string);
+
+@source(type = 'http-call-response', sink.id = "2", http.status.code = "201", 
+	@map(type = 'json', 
+		@attributes(Company = "trp:Company", Email = "trp:Email", FirstName = "trp:FirstName", LastName = "trp:LastName", id = "id")))
+define stream LeadInsertionResponseStream (id string, Email string, FirstName string, LastName string, Company string);
+
+@sink(type = 'http-call', sink.id = "1", blocking.io = "true", publisher.url = "https://<your_salesforce_instance>.salesforce.com/services/data/v20.0/sobjects/Lead/email/{{Email}}", method = "GET", headers = "'Authorization: Bearer <your_salesforce_access_token>'", 
+	@map(type = 'json'))
+define stream LeadExistenceRequestStream (Email string, FirstName string, LastName string, Company string, eof string, fileName string);
+
+@source(type = 'http-call-response', sink.id = "1", http.status.code = "404|200", 
+	@map(type = 'json', fail.on.missing.attribute = "false", 
+		@attributes(Company = "trp:Company", fileName = "trp:fileName", Email = "trp:Email", response = "$", FirstName = "trp:FirstName", LastName = "trp:LastName", eof = "trp:eof")))
+define stream LeadExistenceResponseStream (response object, Email string, FirstName string, LastName string, Company string, eof string, fileName string);
+
+@info(name = 'leadRequester')
+from FileReaderStream#log('Processing Lead') 
+select *
+insert into LeadExistenceRequestStream;
+
+@info(name = 'statusFlagger')
+from LeadExistenceResponseStream 
+select ifThenElse(json:isExists(response, '@.errorCode'), 'New', 'Duplicate') as status, Email, FirstName, LastName, Company, fileName, eof 
+insert into FlaggedRecordsStream;
+
+@info(name = 'newLeadInserter')
+from FlaggedRecordsStream[status == 'New'] 
+select Email, FirstName, LastName, Company 
+insert into LeadInsertionStream;
+
+@info(name = 'fileSummaryLogger')
+from FlaggedRecordsStream#window.expressionBatch("eof != 'true'", true) 
+select str:concat(convert(count(), 'string'), ' ', status) as statusCount, fileName 
+	group by status 
+insert into FileSummaryLogStream;
